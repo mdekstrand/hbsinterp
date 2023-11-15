@@ -1,5 +1,5 @@
 import { AST } from "../hbs.ts";
-import { Environment, HelperSet } from "./environment.ts";
+import { Environment } from "./environment.ts";
 import { interpretExpression } from "./expression.ts";
 import { interpretProgram } from "./statement.ts";
 

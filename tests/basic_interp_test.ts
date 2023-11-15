@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "std/assert/mod.ts";
+import { assertEquals } from "std/assert/mod.ts";
 import { describe, it } from "std/testing/bdd.ts";
 
 import { interpret } from "../mod.ts";

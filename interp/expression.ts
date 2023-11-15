@@ -25,7 +25,7 @@ const LITERALS: VisitHandlers<Environment, Literal> = {
 };
 
 const HANDLERS: VisitHandlers<Environment, any> = {
-  async PathExpression(path) {
+  PathExpression(path) {
     let name = path.head;
     assert(typeof name == "string", "subexpressions not supported");
     let val = this.context[name] as any;
@@ -37,7 +37,7 @@ const HANDLERS: VisitHandlers<Environment, any> = {
   ...LITERALS,
 };
 
-export async function interpretExpression(
+export function interpretExpression(
   env: Environment,
   expr: AST.Expression,
 ): Promise<unknown> {
