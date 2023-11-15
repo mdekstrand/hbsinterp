@@ -1,28 +1,26 @@
-import { assert } from "std/assert/mod.ts";
 import { AST } from "../hbs.ts";
 import { Environment } from "./environment.ts";
+import { interpretExpression } from "./expression.ts";
+import { visit, VisitHandlers } from "./visit.ts";
 
 type BlockVisit = (env: Environment, stmt: AST.Statement) => Promise<string | undefined>;
 
-const HANDLERS: Record<string, BlockVisit> = {
-  async ContentStatement(_env, stmt) {
-    let cs = stmt as AST.ContentStatement;
-    return cs.value;
+const HANDLERS: VisitHandlers<Environment> = {
+  ContentStatement(stmt) {
+    return stmt.value;
   },
-  async CommentStatement(_env, _stmt) {
+  CommentStatement() {
     // noop
     return "";
   },
-  async MustacheStatement(env, stmt) {
-    let ms = stmt as AST.MustacheStatement;
-    return undefined;
+  async MustacheStatement(stmt) {
+    let main = await interpretExpression(this, stmt.path);
+    return main?.toString();
   },
 };
 
 export async function interpretStatement(env: Environment, stmt: AST.Statement): Promise<string> {
-  let h = HANDLERS[stmt.type];
-  assert(h != null, `unsupported statement type ${stmt.type}`);
-  let result = await h(env, stmt);
+  let result = await visit(env, stmt, HANDLERS);
   return result ?? "";
 }
 
