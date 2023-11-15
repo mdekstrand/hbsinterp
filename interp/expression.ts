@@ -4,7 +4,25 @@ import { AST } from "../hbs.ts";
 import { Environment } from "./environment.ts";
 import { visit, VisitHandlers } from "./visit.ts";
 
-type BlockVisit = (env: Environment, expr: AST.Expression) => Promise<string | undefined>;
+type Literal = string | number | boolean | undefined | null;
+
+const LITERALS: VisitHandlers<Environment, Literal> = {
+  StringLiteral(lit) {
+    return lit.value;
+  },
+  NumberLiteral(lit) {
+    return lit.value;
+  },
+  BooleanLiteral(lit) {
+    return lit.value;
+  },
+  UndefinedLiteral() {
+    return undefined;
+  },
+  NullLiteral() {
+    return null;
+  },
+};
 
 const HANDLERS: VisitHandlers<Environment, any> = {
   async PathExpression(path) {
@@ -16,6 +34,7 @@ const HANDLERS: VisitHandlers<Environment, any> = {
     }
     return val;
   },
+  ...LITERALS,
 };
 
 export async function interpretExpression(

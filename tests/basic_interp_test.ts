@@ -28,4 +28,9 @@ describe("basic template interpolation", () => {
     });
     assertEquals(res, "you fail to read HACKEM MUCHE because you are blind");
   });
+
+  it("should interpret a numeric literal", async () => {
+    let res = await interpret("{{ 5 }} scrolls", {});
+    assertEquals(res, "5 scrolls");
+  });
 });
