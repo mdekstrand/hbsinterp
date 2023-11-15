@@ -1,11 +1,11 @@
-import { Environment } from "./environment.ts";
+import { Context, Environment, HelperSet } from "./interp/environment.ts";
 import { AST, parseTemplate } from "./hbs.ts";
-import { interpretProgram } from "./statement.ts";
-import { Context, HelperSet } from "./types.ts";
+import { interpretProgram } from "./interp/statement.ts";
 
-export type { Context, HelperSet } from "./types.ts";
+export { Environment };
+export type { Context, HelperSet };
 
-export async function interpret(
+export function interpret(
   template: AST.Program | string,
   context: Context,
   helpers?: HelperSet,

@@ -1,5 +1,5 @@
 import { assert } from "std/assert/mod.ts";
-import { AST } from "./hbs.ts";
+import { AST } from "../hbs.ts";
 import { Environment } from "./environment.ts";
 
 type BlockVisit = (env: Environment, stmt: AST.Statement) => Promise<string | undefined>;
@@ -12,6 +12,10 @@ const HANDLERS: Record<string, BlockVisit> = {
   async CommentStatement(_env, _stmt) {
     // noop
     return "";
+  },
+  async MustacheStatement(env, stmt) {
+    let ms = stmt as AST.MustacheStatement;
+    return undefined;
   },
 };
 

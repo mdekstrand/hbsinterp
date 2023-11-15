@@ -16,8 +16,14 @@ export type Helper = (
 export type HelperSet = Record<string, Helper>;
 
 /**
- * Interface for template output.
+ * Environment for an HBS interpreter.
  */
-export interface Sink {
-  write(x: string): Promise<void>;
+export class Environment {
+  context: Context;
+  helpers: HelperSet;
+
+  constructor(ctx: Context, help: HelperSet) {
+    this.context = ctx;
+    this.helpers = help;
+  }
 }
