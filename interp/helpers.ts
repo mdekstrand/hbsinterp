@@ -35,6 +35,7 @@ export const BLOCK_HELPERS: Record<string, InternalBlockHelper> = {
         let scope = this.scope({
           $this: x,
           "@index": n,
+          "@first": n == 0,
         });
         if (typeof x == "object") {
           scope = scope.scope(x as Context);
