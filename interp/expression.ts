@@ -27,8 +27,12 @@ const LITERALS: VisitHandlers<Environment, Literal> = {
 const HANDLERS: VisitHandlers<Environment, any> = {
   PathExpression(path) {
     let name = path.head;
+    if (name === undefined) {
+      name = "$this";
+    }
+
     assert(typeof name == "string", "subexpressions not supported");
-    let val = this.context[name] as any;
+    let val = this.lookup(name) as any;
     for (let part of path.tail) {
       val = val[part];
     }

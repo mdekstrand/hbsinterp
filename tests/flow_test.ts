@@ -8,6 +8,7 @@ describe("the #if helper", () => {
     let res = await interpret("{{#if false}}yes{{/if}}", {});
     assertEquals(res, "");
   });
+
   it("should include on true", async () => {
     let res = await interpret("{{#if true}}yes{{/if}}", {});
     assertEquals(res, "yes");
@@ -47,7 +48,7 @@ describe("the #each helper", () => {
   });
   it("should interpolate {{this}} on single value", async () => {
     let res = await interpret("{{#each list}}{{this}}{{/each}}", { list: ["HACKEM MUCHE"] });
-    assertEquals(res, "yes");
+    assertEquals(res, "HACKEM MUCHE");
   });
 
   it("should return else on empty", async () => {
