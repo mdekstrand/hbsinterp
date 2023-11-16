@@ -27,6 +27,7 @@ export const BLOCK_HELPERS: Record<string, InternalBlockHelper> = {
     if (block.params.length != 1) {
       throw new Error("#each helper accepts exactly one parameter");
     }
+    // deno-lint-ignore no-explicit-any
     let iter = await interpretExpression(this, block.params[0]) as any;
     let content = "";
     let n = 0;
