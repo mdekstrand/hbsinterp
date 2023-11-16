@@ -32,6 +32,9 @@ const HANDLERS: VisitHandlers<Environment, any> = {
     }
 
     assert(typeof name == "string", "subexpressions not supported");
+    if (path.data) {
+      name = `@${name}`;
+    }
     let val = this.lookup(name) as any;
     for (let part of path.tail) {
       val = val[part];
