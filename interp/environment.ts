@@ -1,15 +1,11 @@
+import { Helper } from "./helpers.ts";
+
 /**
  * Context for interpreting a Handlebars template.
  */
 export type Context = Record<string, unknown>;
 
-/**
- * Interface for helper functions. Underspecified; the hash is passed as the
- * *last* argument, after the positional parameters.
- */
-export type Helper = (
-  ...args: unknown[]
-) => unknown | Promise<unknown>;
+export type { Helper };
 /**
  * A set of helpers for rendering a template.
  */

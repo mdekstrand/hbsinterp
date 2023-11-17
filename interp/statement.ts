@@ -3,7 +3,7 @@ import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
 import { Context, Environment } from "./environment.ts";
 import { interpretExpression, interpretHash } from "./expression.ts";
 import { visit, VisitHandlers } from "./visit.ts";
-import { BLOCK_HELPERS } from "./helpers.ts";
+import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.ts";
 
 const HANDLERS: VisitHandlers<Environment> = {
   ContentStatement(stmt) {
@@ -15,8 +15,20 @@ const HANDLERS: VisitHandlers<Environment> = {
   },
 
   async MustacheStatement(stmt) {
-    let main = await interpretExpression(this, stmt.path);
-    return main?.toString();
+    if (stmt.params.length || stmt.hash?.pairs.length) {
+      requirePathExpression(stmt.path);
+      let name = stmt.path.head;
+      assert(typeof name == "string", "subexpressions not supported");
+      assert(stmt.path.tail.length == 0, "compound partial paths not supported");
+      let helper = this.helpers[name];
+      let impl = helper ? wrapBasicHelper(helper) : HELPERS[name];
+      if (!impl) throw new Error(`unknown helper ${name}`);
+      let val = await impl.call(this, stmt.params, stmt.hash);
+      return val?.toString();
+    } else {
+      let main = await interpretExpression(this, stmt.path);
+      return main?.toString();
+    }
   },
 
   BlockStatement(stmt) {

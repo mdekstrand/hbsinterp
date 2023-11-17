@@ -1,14 +1,39 @@
 import { AST } from "../hbs.ts";
 import { Context, Environment } from "./environment.ts";
-import { interpretExpression } from "./expression.ts";
+import { interpretExpression, interpretHash } from "./expression.ts";
 import { interpretProgram } from "./statement.ts";
 
-export type InternalBlockHelper = (
+export type AdvancedBlockHelper = (
   this: Environment,
   block: AST.BlockStatement,
 ) => Promise<string | undefined>;
 
-export const BLOCK_HELPERS: Record<string, InternalBlockHelper> = {
+export type AdvancedHelper = (
+  this: Environment,
+  params: AST.Expression[],
+  hash?: AST.Hash,
+) => Promise<unknown | undefined>;
+
+/**
+ * Interface for helper functions. Underspecified; the hash is passed as the
+ * *last* argument, after the positional parameters.
+ */
+export type Helper = (
+  ...args: unknown[]
+) => unknown | Promise<unknown>;
+
+export function wrapBasicHelper(helper: Helper): AdvancedHelper {
+  return async function (params: AST.Expression[], hash?: AST.Hash) {
+    let pvs = await Promise.all(params.map((e) => interpretExpression(this, e)));
+    if (hash) {
+      pvs.push(await interpretHash(this, hash));
+    }
+    let x = await helper(...pvs);
+    return x;
+  };
+}
+
+export const BLOCK_HELPERS: Record<string, AdvancedBlockHelper> = {
   async if(block) {
     if (block.params.length != 1) {
       throw new Error("#if helper accepts exactly one parameter");
@@ -65,4 +90,11 @@ export const BLOCK_HELPERS: Record<string, InternalBlockHelper> = {
     }
     return interpretProgram(scope, block.program);
   },
+};
+
+export const HELPERS: Record<string, AdvancedHelper> = {
+  // deno-lint-ignore no-explicit-any
+  lookup: wrapBasicHelper((obj: any, key: any) => {
+    return obj[key];
+  }),
 };
