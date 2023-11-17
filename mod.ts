@@ -1,10 +1,10 @@
-import { Context, Environment, EnvSpec, HelperSet, wrapPartials } from "./interp/environment.ts";
+import { Context, Environment, EnvSpec, Helper, HelperSet, wrapPartials } from "./interp/environment.ts";
 import { AST, parseTemplate } from "./hbs.ts";
 import { interpretProgram } from "./interp/statement.ts";
 export { safe } from "./interp/strings.ts";
 
 export { Environment };
-export type { Context, HelperSet };
+export type { Context, Helper, HelperSet };
 
 export function interpret(template: AST.Program | string, spec: EnvSpec): Promise<string> {
   let partials = spec.partials;
