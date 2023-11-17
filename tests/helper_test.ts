@@ -1,4 +1,4 @@
-import { assertEquals } from "std/assert/mod.ts";
+import { assertEquals, assertRejects } from "std/assert/mod.ts";
 import { describe, it } from "std/testing/bdd.ts";
 
 import { interpret } from "../mod.ts";
@@ -16,5 +16,26 @@ describe("lookup helper", () => {
       },
     });
     assertEquals(res, "LEP GEX VEN ZEA");
+  });
+});
+
+describe("custom helpers", () => {
+  it("should fail with an unnown helper", async () => {
+    await assertRejects(() => interpret("{{unknown fish}}", {}));
+  });
+
+  it("should call a custom helper", async () => {
+    let template = "{{lower scroll}}";
+    let res = await interpret(template, {
+      context: {
+        scroll: "LEP GEX VEN ZEA",
+      },
+      helpers: {
+        lower(val) {
+          return val?.toString().toLowerCase();
+        },
+      },
+    });
+    assertEquals(res, "lep gex ven zea");
   });
 });

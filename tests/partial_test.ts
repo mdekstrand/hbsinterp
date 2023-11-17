@@ -19,15 +19,6 @@ describe("partials", () => {
     assertEquals(res, "ANDOVA BEGARIN");
   });
 
-  it("should include partial", async () => {
-    let res = await interpret("{{>include}}", {
-      partials: {
-        include: "ANDOVA BEGARIN",
-      },
-    });
-    assertEquals(res, "ANDOVA BEGARIN");
-  });
-
   it("should resolve variable", async () => {
     let res = await interpret("{{>include}}", {
       context: {
