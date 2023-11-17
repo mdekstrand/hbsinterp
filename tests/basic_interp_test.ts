@@ -8,13 +8,20 @@ describe("basic template interpolation", () => {
     let res = await interpret("", {});
     assertEquals(res, "");
   });
+
   it("should pass through a fixed string", async () => {
     let res = await interpret("FOOBIE BLETCH", {});
     assertEquals(res, "FOOBIE BLETCH");
   });
+
   it("should ignore a comment", async () => {
     let res = await interpret("testing fish {{! comment}} and chips", {});
     assertEquals(res, "testing fish  and chips");
+  });
+
+  it("should render undefined as empty string", async () => {
+    let res = await interpret("{{foo}}", {});
+    assertEquals(res, "");
   });
 
   it("should inerpolate a simple variable", async () => {
