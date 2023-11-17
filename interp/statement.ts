@@ -1,5 +1,5 @@
 import { assert } from "std/assert/mod.ts";
-import { escape } from "https://deno.land/std@0.207.0/html/mod.ts";
+import { escape } from "std/html/mod.ts";
 
 import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
 import { Context, Environment } from "./environment.ts";
