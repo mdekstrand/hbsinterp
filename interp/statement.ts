@@ -1,9 +1,12 @@
 import { assert } from "std/assert/mod.ts";
+import { escape } from "https://deno.land/std@0.207.0/html/mod.ts";
+
 import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
 import { Context, Environment } from "./environment.ts";
 import { interpretExpression, interpretHash } from "./expression.ts";
 import { visit, VisitHandlers } from "./visit.ts";
 import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.ts";
+import { SafeString } from "./strings.ts";
 
 const HANDLERS: VisitHandlers<Environment> = {
   ContentStatement(stmt) {
@@ -15,6 +18,7 @@ const HANDLERS: VisitHandlers<Environment> = {
   },
 
   async MustacheStatement(stmt) {
+    let result: unknown;
     if (stmt.params.length || stmt.hash?.pairs.length) {
       requirePathExpression(stmt.path);
       let name = stmt.path.head;
@@ -24,10 +28,19 @@ const HANDLERS: VisitHandlers<Environment> = {
       let impl = helper ? wrapBasicHelper(helper) : HELPERS[name];
       if (!impl) throw new Error(`unknown helper ${name}`);
       let val = await impl.call(this, stmt.params, stmt.hash);
-      return val?.toString();
+      result = val?.toString();
     } else {
       let main = await interpretExpression(this, stmt.path);
-      return main?.toString();
+      result = main?.toString();
+    }
+    if (result instanceof SafeString || result == null) {
+      return result?.content;
+    }
+    let text = result.toString();
+    if (stmt.escaped) {
+      return escape(text);
+    } else {
+      return text;
     }
   },
 

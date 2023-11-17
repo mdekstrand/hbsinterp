@@ -1,6 +1,7 @@
 import { Context, Environment, EnvSpec, HelperSet, wrapPartials } from "./interp/environment.ts";
 import { AST, parseTemplate } from "./hbs.ts";
 import { interpretProgram } from "./interp/statement.ts";
+export { safe } from "./interp/strings.ts";
 
 export { Environment };
 export type { Context, HelperSet };
