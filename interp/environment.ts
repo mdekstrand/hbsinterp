@@ -11,7 +11,7 @@ export type { Helper };
  */
 export type HelperSet = Record<string, Helper>;
 
-export type PartialLookup = (name: string) => string | undefined;
+export type PartialLookup = (name: string) => string | undefined | Promise<string | undefined>;
 
 export type EnvSpec = {
   context?: Context;

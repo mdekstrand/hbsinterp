@@ -67,7 +67,7 @@ const HANDLERS: VisitHandlers<Environment> = {
     let name = nameExpr.head;
     assert(typeof name == "string", "subexpressions not supported");
     assert(nameExpr.tail.length == 0, "compound partial paths not supported");
-    let inner = this.partials(name);
+    let inner = await this.partials(name);
     if (!inner) {
       throw new Error(`undefined partial ${name}`);
     }
