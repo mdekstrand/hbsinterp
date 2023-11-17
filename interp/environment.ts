@@ -15,6 +15,18 @@ export type Helper = (
  */
 export type HelperSet = Record<string, Helper>;
 
+export type PartialLookup = (name: string) => string | undefined;
+
+export type EnvSpec = {
+  context?: Context;
+  helpers?: HelperSet;
+  partials?: Record<string, string> | PartialLookup;
+};
+
+export function wrapPartials(set: Record<string, string>): PartialLookup {
+  return (name: string) => set[name];
+}
+
 /**
  * Environment for an HBS interpreter.
  */
@@ -22,10 +34,12 @@ export class Environment {
   parent?: Environment;
   context: Context;
   helpers: HelperSet;
+  partials: PartialLookup;
 
-  constructor(ctx: Context, help: HelperSet) {
+  constructor(ctx: Context, help: HelperSet, partials: PartialLookup) {
     this.context = ctx;
     this.helpers = help;
+    this.partials = partials;
   }
 
   /**
@@ -35,7 +49,7 @@ export class Environment {
    * @returns The inner-scope environment.
    */
   scope(ctx: Context): Environment {
-    let kid = new Environment(ctx, this.helpers);
+    let kid = new Environment(ctx, this.helpers, this.partials);
     kid.parent = this;
     return kid;
   }

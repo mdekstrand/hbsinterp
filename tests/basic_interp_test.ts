@@ -18,13 +18,13 @@ describe("basic template interpolation", () => {
   });
 
   it("should inerpolate a simple variable", async () => {
-    let res = await interpret("{{foo}}", { foo: "HACKEM MUCHE" });
+    let res = await interpret("{{foo}}", { context: { foo: "HACKEM MUCHE" } });
     assertEquals(res, "HACKEM MUCHE");
   });
 
   it("should inerpolate a variable with text", async () => {
     let res = await interpret("you fail to read {{scroll}} because you are blind", {
-      scroll: "HACKEM MUCHE",
+      context: { scroll: "HACKEM MUCHE" },
     });
     assertEquals(res, "you fail to read HACKEM MUCHE because you are blind");
   });

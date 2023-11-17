@@ -25,17 +25,17 @@ describe("the #if helper", () => {
 
   it("should switch on variable", async () => {
     let t = "{{#if flag}}yes{{else}}no{{/if}}";
-    let res = await interpret(t, { flag: true });
+    let res = await interpret(t, { context: { flag: true } });
     assertEquals(res, "yes");
 
-    res = await interpret(t, { flag: false });
+    res = await interpret(t, { context: { flag: false } });
     assertEquals(res, "no");
   });
 });
 
 describe("the #each helper", () => {
   it("should omit on empty", async () => {
-    let res = await interpret("{{#each list}}yes{{/each}}", { list: [] });
+    let res = await interpret("{{#each list}}yes{{/each}}", { context: { list: [] } });
     assertEquals(res, "");
   });
   it("should omit on undefined", async () => {
@@ -43,22 +43,26 @@ describe("the #each helper", () => {
     assertEquals(res, "");
   });
   it("should include on single value", async () => {
-    let res = await interpret("{{#each list}}yes{{/each}}", { list: ["HACKEM MUCHE"] });
+    let res = await interpret("{{#each list}}yes{{/each}}", {
+      context: { list: ["HACKEM MUCHE"] },
+    });
     assertEquals(res, "yes");
   });
   it("should interpolate {{this}} on single value", async () => {
-    let res = await interpret("{{#each list}}{{this}}{{/each}}", { list: ["HACKEM MUCHE"] });
+    let res = await interpret("{{#each list}}{{this}}{{/each}}", {
+      context: { list: ["HACKEM MUCHE"] },
+    });
     assertEquals(res, "HACKEM MUCHE");
   });
 
   it("should return else on empty", async () => {
-    let res = await interpret("{{#each list}}yes{{else}}no{{/each}}", { list: [] });
+    let res = await interpret("{{#each list}}yes{{else}}no{{/each}}", { context: { list: [] } });
     assertEquals(res, "no");
   });
 
   it("should interpolate indexes", async () => {
     let res = await interpret("{{#each list}}\n{{@index}}. {{this}}\n{{/each}}", {
-      list: ["HACKEM MUCHE", "FOOBIE BLETCH"],
+      context: { list: ["HACKEM MUCHE", "FOOBIE BLETCH"] },
     });
     assertEquals(res, "0. HACKEM MUCHE\n" + "1. FOOBIE BLETCH\n");
   });
