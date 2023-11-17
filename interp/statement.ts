@@ -1,6 +1,7 @@
-import { AST } from "../hbs.ts";
-import { Environment } from "./environment.ts";
-import { interpretExpression } from "./expression.ts";
+import { assert } from "std/assert/mod.ts";
+import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
+import { Context, Environment } from "./environment.ts";
+import { interpretExpression, interpretHash } from "./expression.ts";
 import { visit, VisitHandlers } from "./visit.ts";
 import { BLOCK_HELPERS } from "./helpers.ts";
 
@@ -33,6 +34,34 @@ const HANDLERS: VisitHandlers<Environment> = {
       throw new Error(`undefined helper ${name}`);
     }
     return helper.call(this, stmt);
+  },
+
+  async PartialStatement(stmt) {
+    let nameExpr = stmt.name;
+    requirePathExpression(nameExpr);
+    let name = nameExpr.head;
+    assert(typeof name == "string", "subexpressions not supported");
+    assert(nameExpr.tail.length == 0, "compound partial paths not supported");
+    let inner = this.partials(name);
+    if (!inner) {
+      throw new Error(`undefined partial ${name}`);
+    }
+    let partial = parseTemplate(inner);
+    // deno-lint-ignore no-this-alias
+    let scope = this;
+    if (stmt.params.length) {
+      assert(stmt.params.length == 1, "multiple parameters to partial not allowed");
+      let child = await interpretExpression(this, stmt.params[0]);
+      if (typeof child != "object") {
+        throw new TypeError("helper context must be object");
+      }
+      scope = scope.scope(child as Context);
+    }
+    if (stmt.hash) {
+      let context = await interpretHash(this, stmt.hash);
+      scope = scope.scope(context);
+    }
+    return interpretProgram(scope, partial);
   },
 };
 

@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { assert } from "std/assert/mod.ts";
 import { AST } from "../hbs.ts";
-import { Environment } from "./environment.ts";
+import { Context, Environment } from "./environment.ts";
 import { visit, VisitHandlers } from "./visit.ts";
 
 type Literal = string | number | boolean | undefined | null;
@@ -49,4 +49,12 @@ export function interpretExpression(
   expr: AST.Expression,
 ): Promise<unknown> {
   return visit(env, expr, HANDLERS);
+}
+
+export async function interpretHash(env: Environment, hash: AST.Hash): Promise<Context> {
+  let context: Context = {};
+  for (let pair of hash.pairs) {
+    context[pair.key] = await interpretExpression(env, pair.value);
+  }
+  return context;
 }
