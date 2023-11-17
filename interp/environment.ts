@@ -17,7 +17,7 @@ export type EnvSpec = {
   context?: Context;
   helpers?: HelperSet;
   partials?: Record<string, string> | PartialLookup;
-  trace: (msg: string, ...args: unknown[]) => void;
+  trace?: (msg: string, ...args: unknown[]) => void;
 };
 
 export function wrapPartials(set: Record<string, string>): PartialLookup {

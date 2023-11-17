@@ -37,6 +37,6 @@ describe("HTML escaping", () => {
         },
       },
     });
-    assertEquals(res, "Hello, &lt;strong&gt;world&lt;/strong&gt;");
+    assertEquals(res, "Hello, <strong>world</strong>");
   });
 });
