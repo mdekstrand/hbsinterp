@@ -30,6 +30,7 @@ const HANDLERS: VisitHandlers<Environment> = {
       if (!impl) throw new Error(`unknown helper ${name}`);
       result = await impl.call(this, stmt.params, stmt.hash);
     } else {
+      this.trace("interpreting expression %o", stmt.path);
       result = await interpretExpression(this, stmt.path);
     }
     if (result instanceof SafeString || result == null) {
