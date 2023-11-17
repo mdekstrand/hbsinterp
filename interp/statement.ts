@@ -24,14 +24,13 @@ const HANDLERS: VisitHandlers<Environment> = {
       let name = stmt.path.head;
       assert(typeof name == "string", "subexpressions not supported");
       assert(stmt.path.tail.length == 0, "compound partial paths not supported");
+      this.trace("applying helper %s", name);
       let helper = this.helpers[name];
       let impl = helper ? wrapBasicHelper(helper) : HELPERS[name];
       if (!impl) throw new Error(`unknown helper ${name}`);
-      let val = await impl.call(this, stmt.params, stmt.hash);
-      result = val?.toString();
+      result = await impl.call(this, stmt.params, stmt.hash);
     } else {
-      let main = await interpretExpression(this, stmt.path);
-      result = main?.toString();
+      result = await interpretExpression(this, stmt.path);
     }
     if (result instanceof SafeString || result == null) {
       return result?.content;
