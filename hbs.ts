@@ -1,7 +1,7 @@
-import { AST } from "https://esm.sh/@handlebars/parser@2.1.0";
+import { AST } from "https://esm.sh/@handlebars/parser@2.1.0?pin=v134";
 
-export type { AST } from "https://esm.sh/@handlebars/parser@2.1.0";
-export { parse as parseTemplate } from "https://esm.sh/@handlebars/parser@2.1.0";
+export type { AST } from "https://esm.sh/@handlebars/parser@2.1.0?pin=v134";
+export { parse as parseTemplate } from "https://esm.sh/@handlebars/parser@2.1.0?pin=v134";
 
 export function requireMustacheStatement(
   obj: AST.Node,
