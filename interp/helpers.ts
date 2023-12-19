@@ -56,11 +56,39 @@ export const BLOCK_HELPERS: Record<string, AdvancedBlockHelper> = {
     let iter = await interpretExpression(this, block.params[0]) as any;
     let content = "";
     let n = 0;
-    if (iter) {
+    if (iter && iter[Symbol.iterator]) {
       for (let x of iter) {
         let scope = this.scope({
           $this: x,
           "@index": n,
+          "@first": n == 0,
+        });
+        if (typeof x == "object") {
+          scope = scope.scope(x as Context);
+        }
+        let result = await interpretProgram(scope, block.program);
+        content += result;
+        n += 1;
+      }
+    } else if (iter && iter[Symbol.asyncIterator]) {
+      for await (let x of iter) {
+        let scope = this.scope({
+          $this: x,
+          "@index": n,
+          "@first": n == 0,
+        });
+        if (typeof x == "object") {
+          scope = scope.scope(x as Context);
+        }
+        let result = await interpretProgram(scope, block.program);
+        content += result;
+        n += 1;
+      }
+    } else if (iter) {
+      for (let [k, x] of Object.entries(iter)) {
+        let scope = this.scope({
+          $this: x,
+          "@key": k,
           "@first": n == 0,
         });
         if (typeof x == "object") {

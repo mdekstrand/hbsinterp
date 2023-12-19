@@ -38,6 +38,7 @@
     "https://deno.land/std@0.206.0/testing/_test_suite.ts": "30f018feeb3835f12ab198d8a518f9089b1bcb2e8c838a8b615ab10d5005465c",
     "https://deno.land/std@0.206.0/testing/bdd.ts": "3f446df5ef8e856a869e8eec54c8482590415741ff0b6358a00c43486cc15769",
     "https://esm.sh/@handlebars/parser@2.1.0": "96ac14cee8214fc275d08e6b14ff65d833895c127645f3b702542482a4268ef9",
+    "https://esm.sh/@handlebars/parser@2.1.0?pin=v134": "96ac14cee8214fc275d08e6b14ff65d833895c127645f3b702542482a4268ef9",
     "https://esm.sh/v134/@handlebars/parser@2.1.0/denonext/parser.mjs": "82decfc35e49ff3a140b342bf491ef55e1c072f94dbb0e9fe3992ab034be1de3"
   }
 }

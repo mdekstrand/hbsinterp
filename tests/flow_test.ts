@@ -66,4 +66,11 @@ describe("the #each helper", () => {
     });
     assertEquals(res, "0. HACKEM MUCHE\n" + "1. FOOBIE BLETCH\n");
   });
+
+  it("should iterate objects", async () => {
+    let res = await interpret("{{#each record}}\n{{@key}}. {{this}}\n{{/each}}", {
+      context: { record: { current: "HACKEM MUCHE", previous: "READ ME" } },
+    });
+    assertEquals(res, "current. HACKEM MUCHE\n" + "previous. READ ME\n");
+  });
 });
