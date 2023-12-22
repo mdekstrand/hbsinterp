@@ -1,7 +1,7 @@
 import { assertEquals } from "std/assert/mod.ts";
 import { describe, it } from "std/testing/bdd.ts";
 
-import { interpret, safe } from "../mod.ts";
+import { interpret } from "../mod.ts";
 
 describe("Whitespace control", () => {
   it("should preserve whitespace", async () => {
