@@ -5,7 +5,8 @@
       "jsr:@std/assert@^0.222.1": "jsr:@std/assert@0.222.1",
       "jsr:@std/fmt@^0.222.1": "jsr:@std/fmt@0.222.1",
       "jsr:@std/html@^0.222.1": "jsr:@std/html@0.222.1",
-      "jsr:@std/testing@^0.222.1": "jsr:@std/testing@0.222.1"
+      "jsr:@std/testing@^0.222.1": "jsr:@std/testing@0.222.1",
+      "npm:@handlebars/parser@^2.1.0": "npm:@handlebars/parser@2.1.0"
     },
     "jsr": {
       "@std/assert@0.222.1": {
@@ -22,6 +23,12 @@
       },
       "@std/testing@0.222.1": {
         "integrity": "7be5c3ef185d31883116824a2dd604eb6f12a56fd5ed80489c7c696b2a76c5bc"
+      }
+    },
+    "npm": {
+      "@handlebars/parser@2.1.0": {
+        "integrity": "sha512-R14NuNaSKZ6eE9y4t0fg/1f8iKd5ZJtSOTIseGFzXINTV17XffhLG2Y0CvdKOgyVQ7+UnXi89YGzRo/xsgwHIA==",
+        "dependencies": {}
       }
     }
   },
@@ -106,7 +113,8 @@
     "dependencies": [
       "jsr:@std/assert@^0.222.1",
       "jsr:@std/html@^0.222.1",
-      "jsr:@std/testing@^0.222.1"
+      "jsr:@std/testing@^0.222.1",
+      "npm:@handlebars/parser@^2.1.0"
     ]
   }
 }

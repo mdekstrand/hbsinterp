@@ -5,8 +5,8 @@ export class SafeString {
     this.content = s;
   }
 
-  toString() {
-    return this.content;
+  toString(): string {
+    return this.content ?? "";
   }
 }
 
