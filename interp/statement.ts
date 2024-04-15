@@ -1,5 +1,5 @@
-import { assert } from "std/assert/mod.ts";
-import { escape } from "std/html/mod.ts";
+import { assert } from "@std/assert";
+import { escape } from "@std/html";
 
 import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
 import { Context, Environment } from "./environment.ts";
