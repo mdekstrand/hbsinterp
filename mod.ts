@@ -5,7 +5,7 @@ export { safe } from "./interp/strings.ts";
 import type { SafeString } from "./interp/strings.ts";
 
 export { Environment };
-export type { Context, Helper, HelperSet, SafeString };
+export type { Context, EnvSpec, Helper, HelperSet, SafeString };
 
 /**
  * Evaluate a template with a specified context or environment.
