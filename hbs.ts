@@ -1,3 +1,8 @@
+/**
+ * Helper routines for working with Handlebars.
+ *
+ * @module
+ */
 import { AST } from "@handlebars/parser";
 
 export type { AST };

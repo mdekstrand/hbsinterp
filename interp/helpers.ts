@@ -15,8 +15,8 @@ export type AdvancedHelper = (
 ) => Promise<unknown | undefined>;
 
 /**
- * Interface for helper functions. Underspecified; the hash is passed as the
- * *last* argument, after the positional parameters.
+ * Interface for helper functions. The type is underspecified; the hash is
+ * passed as the *last* argument, after the positional parameters.
  */
 export type Helper = (
   ...args: unknown[]

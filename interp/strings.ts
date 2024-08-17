@@ -1,3 +1,6 @@
+/**
+ * Safe-for-HTML string wrapper.
+ */
 export class SafeString {
   content?: string;
 
@@ -11,7 +14,7 @@ export class SafeString {
 }
 
 /**
- * Mark a string as safe-for-HTML.
+ * Mark a string as safe-for-HTML (it will not be escaped).
  * @param s The string
  * @returns A {@link SafeString} wrapping this string.
  */

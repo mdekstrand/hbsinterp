@@ -11,12 +11,32 @@ export type { Helper };
  */
 export type HelperSet = Record<string, Helper>;
 
+/**
+ * A function that looks up a partial and returns its template content.
+ */
 export type PartialLookup = (name: string) => string | undefined | Promise<string | undefined>;
 
+/**
+ * Type specifying the environment for evaluating a template.
+ */
 export type EnvSpec = {
+  /**
+   * The context (variable/data definitions) for the template.
+   */
   context?: Context;
+  /**
+   * Custom helpers to make available to the template.
+   */
   helpers?: HelperSet;
+  /**
+   * Pre-loaded partials or a function to look up and load partials.
+   */
   partials?: Record<string, string> | PartialLookup;
+  /**
+   * Log handler for tracing evaluation.
+   * @param msg Message format string.
+   * @param args Message arguments.
+   */
   trace?: (msg: string, ...args: unknown[]) => void;
 };
 
@@ -25,7 +45,8 @@ export function wrapPartials(set: Record<string, string>): PartialLookup {
 }
 
 /**
- * Environment for an HBS interpreter.
+ * Environment for an HBS interpreter.  It is rare to instantiate this directly;
+ * instead call {@link setup} with an {@link EnvSpec}.
  */
 export class Environment {
   parent?: Environment;
@@ -39,6 +60,12 @@ export class Environment {
     this.partials = partials;
   }
 
+  /**
+   * Initialize an environment from an environment specification. This is the
+   * usual way to obtain an environment.
+   * @param spec The environment specification.
+   * @returns An instantiated environment that is ready to use.
+   */
   static setup(spec: EnvSpec): Environment {
     let partials = spec.partials;
     if (typeof partials == "object") {
