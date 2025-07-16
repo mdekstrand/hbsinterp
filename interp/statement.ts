@@ -4,7 +4,7 @@ import { AST, parseTemplate, requirePathExpression } from "../hbs.js";
 import { Context, Environment } from "./environment.js";
 import { interpretExpression, interpretHash } from "./expression.js";
 import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.js";
-import { SafeString } from "./strings.js";
+import { escapeHTML, SafeString } from "./strings.js";
 import { visit, VisitHandlers } from "./visit.js";
 
 const HANDLERS: VisitHandlers<Environment> = {
@@ -37,7 +37,7 @@ const HANDLERS: VisitHandlers<Environment> = {
     }
     let text = result.toString();
     if (stmt.escaped) {
-      return escape(text);
+      return escapeHTML(text);
     } else {
       return text;
     }

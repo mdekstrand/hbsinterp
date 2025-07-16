@@ -21,3 +21,10 @@ export class SafeString {
 export function safe(s?: string): SafeString {
   return new SafeString(s);
 }
+
+export function escapeHTML(s: string): string {
+  s = s.replaceAll("&", "&amp;");
+  s = s.replaceAll("<", "&lt;");
+  s = s.replaceAll(">", "&gt;");
+  return s;
+}
