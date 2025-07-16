@@ -6,7 +6,7 @@ import { interpret } from "../mod.js";
 
 describe("partials", () => {
   it("should fail on empty partial", async () => {
-    await assertRejects(async () => {
+    await assert.rejects(async () => {
       await interpret("{{>partial}}", {});
     });
   });

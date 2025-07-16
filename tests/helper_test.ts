@@ -22,7 +22,7 @@ describe("lookup helper", () => {
 
 describe("custom helpers", () => {
   it("should fail with an unnown helper", async () => {
-    await assertRejects(() => interpret("{{unknown fish}}", {}));
+    await assert.rejects(() => interpret("{{unknown fish}}", {}));
   });
 
   it("should call a custom helper", async () => {
