@@ -1,12 +1,11 @@
-import { assert } from "@std/assert";
-import { escape } from "@std/html";
+import assert from "node:assert/strict";
 
 import { AST, parseTemplate, requirePathExpression } from "../hbs.js";
 import { Context, Environment } from "./environment.js";
 import { interpretExpression, interpretHash } from "./expression.js";
-import { visit, VisitHandlers } from "./visit.js";
 import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.js";
 import { SafeString } from "./strings.js";
+import { visit, VisitHandlers } from "./visit.js";
 
 const HANDLERS: VisitHandlers<Environment> = {
   ContentStatement(stmt) {

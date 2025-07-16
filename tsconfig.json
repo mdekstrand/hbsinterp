@@ -5,6 +5,7 @@
     "target": "es2024",
     "strict": false,
     "declaration": true,
+    "strictNullChecks": true,
     "lib": [
       "ESNext"
     ]

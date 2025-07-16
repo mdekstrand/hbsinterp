@@ -1,5 +1,6 @@
 // deno-lint-ignore-file no-explicit-any
-import { assert } from "@std/assert";
+import assert from "node:assert/strict";
+
 import { AST } from "../hbs.js";
 import { Context, Environment } from "./environment.js";
 import { visit, VisitHandlers } from "./visit.js";

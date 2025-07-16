@@ -1,7 +1,7 @@
-import { Context, Environment, EnvSpec, Helper, HelperSet } from "./interp/environment.js";
 import { AST, parseTemplate } from "./hbs.js";
+import { Context, Environment, EnvSpec, Helper, HelperSet } from "./interp/environment.js";
 import { interpretProgram } from "./interp/statement.js";
-export { safe } from "./interp/strings.ts";
+export { safe } from "./interp/strings.js";
 import type { SafeString } from "./interp/strings.js";
 
 export { Environment };
