@@ -17,7 +17,7 @@
     "test": "tests"
   },
   "types": "./dist/mod.d.ts",
-  "module": "./dist/mod.js",
+  "main": "./dist/mod.js",
   "files": [
     "README.md",
     "package.json",
