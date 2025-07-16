@@ -1,12 +1,12 @@
 import { assert } from "@std/assert";
 import { escape } from "@std/html";
 
-import { AST, parseTemplate, requirePathExpression } from "../hbs.ts";
-import { Context, Environment } from "./environment.ts";
-import { interpretExpression, interpretHash } from "./expression.ts";
-import { visit, VisitHandlers } from "./visit.ts";
-import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.ts";
-import { SafeString } from "./strings.ts";
+import { AST, parseTemplate, requirePathExpression } from "../hbs.js";
+import { Context, Environment } from "./environment.js";
+import { interpretExpression, interpretHash } from "./expression.js";
+import { visit, VisitHandlers } from "./visit.js";
+import { BLOCK_HELPERS, HELPERS, wrapBasicHelper } from "./helpers.js";
+import { SafeString } from "./strings.js";
 
 const HANDLERS: VisitHandlers<Environment> = {
   ContentStatement(stmt) {

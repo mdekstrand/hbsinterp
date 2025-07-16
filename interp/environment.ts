@@ -1,4 +1,4 @@
-import { Helper } from "./helpers.ts";
+import { Helper } from "./helpers.js";
 
 /**
  * Context for interpreting a Handlebars template.
@@ -85,7 +85,7 @@ export class Environment {
    * @param _msg The message (with format specifiers, for console.log)
    * @param _args The message arguments
    */
-  trace(_msg: string, ..._args: unknown[]): void {}
+  trace(_msg: string, ..._args: unknown[]): void { }
 
   /**
    * Make an environment for an inner scope.  The scope is returned as a new

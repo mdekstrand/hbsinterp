@@ -1,4 +1,4 @@
-import { AST } from "../hbs.ts";
+import { AST } from "../hbs.js";
 
 export type Result = string | undefined | Promise<string | undefined>;
 

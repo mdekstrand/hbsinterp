@@ -1,7 +1,7 @@
 import { assertEquals } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
 
-import { interpret, safe } from "../mod.ts";
+import { interpret, safe } from "../mod.js";
 
 describe("HTML escaping", () => {
   it("should escape HTML", async () => {

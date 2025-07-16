@@ -1,8 +1,8 @@
-import { Context, Environment, EnvSpec, Helper, HelperSet } from "./interp/environment.ts";
-import { AST, parseTemplate } from "./hbs.ts";
-import { interpretProgram } from "./interp/statement.ts";
+import { Context, Environment, EnvSpec, Helper, HelperSet } from "./interp/environment.js";
+import { AST, parseTemplate } from "./hbs.js";
+import { interpretProgram } from "./interp/statement.js";
 export { safe } from "./interp/strings.ts";
-import type { SafeString } from "./interp/strings.ts";
+import type { SafeString } from "./interp/strings.js";
 
 export { Environment };
 export type { Context, EnvSpec, Helper, HelperSet, SafeString };

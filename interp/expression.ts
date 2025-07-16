@@ -1,8 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
 import { assert } from "@std/assert";
-import { AST } from "../hbs.ts";
-import { Context, Environment } from "./environment.ts";
-import { visit, VisitHandlers } from "./visit.ts";
+import { AST } from "../hbs.js";
+import { Context, Environment } from "./environment.js";
+import { visit, VisitHandlers } from "./visit.js";
 
 type Literal = string | number | boolean | undefined | null;
 

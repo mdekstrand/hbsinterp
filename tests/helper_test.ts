@@ -1,7 +1,7 @@
 import { assertEquals, assertRejects } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
 
-import { interpret } from "../mod.ts";
+import { interpret } from "../mod.js";
 
 describe("lookup helper", () => {
   it("should lookup a value", async () => {

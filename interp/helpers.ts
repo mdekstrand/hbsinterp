@@ -1,7 +1,7 @@
-import { AST } from "../hbs.ts";
-import { Context, Environment } from "./environment.ts";
-import { interpretExpression, interpretHash } from "./expression.ts";
-import { interpretProgram } from "./statement.ts";
+import { AST } from "../hbs.js";
+import { Context, Environment } from "./environment.js";
+import { interpretExpression, interpretHash } from "./expression.js";
+import { interpretProgram } from "./statement.js";
 
 export type AdvancedBlockHelper = (
   this: Environment,
