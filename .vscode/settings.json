@@ -1,12 +1,15 @@
 {
   "[typescript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dprint.dprint"
   },
   "[javascript]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dprint.dprint"
   },
   "[jsonc]": {
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dprint.dprint"
   },
   "deno.enable": false
 }
