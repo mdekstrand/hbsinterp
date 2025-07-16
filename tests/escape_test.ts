@@ -1,31 +1,32 @@
-import { assertEquals } from "@std/assert";
-import { describe, it } from "@std/testing/bdd";
+import assert from "node:assert";
+
+import { describe, it } from "mocha";
 
 import { interpret, safe } from "../mod.js";
 
 describe("HTML escaping", () => {
   it("should escape HTML", async () => {
     let res = await interpret("{{html}}", { context: { html: "<br>" } });
-    assertEquals(res, "&lt;br&gt;");
+    assert.equal(res, "&lt;br&gt;");
   });
 
   it("should pass through HTML with triple braces", async () => {
     let res = await interpret("{{{html}}}", { context: { html: "<br>" } });
-    assertEquals(res, "<br>");
+    assert.equal(res, "<br>");
   });
 
   it("should escape helper results", async () => {
     let res = await interpret("{{lookup obj 'key'}}", {
       context: { obj: { key: "<br>&hello" } },
     });
-    assertEquals(res, "&lt;br&gt;&amp;hello");
+    assert.equal(res, "&lt;br&gt;&amp;hello");
   });
 
   it("should pass through helper results with triple braces", async () => {
     let res = await interpret("{{{lookup obj 'key'}}}", {
       context: { obj: { key: "<br>&hello" } },
     });
-    assertEquals(res, "<br>&hello");
+    assert.equal(res, "<br>&hello");
   });
 
   it("should pass through safe helper results", async () => {
@@ -37,6 +38,6 @@ describe("HTML escaping", () => {
         },
       },
     });
-    assertEquals(res, "Hello, <strong>world</strong>");
+    assert.equal(res, "Hello, <strong>world</strong>");
   });
 });

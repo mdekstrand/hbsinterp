@@ -1,5 +1,6 @@
-import { assertEquals, assertRejects } from "@std/assert";
-import { describe, it } from "@std/testing/bdd";
+import assert from "node:assert";
+
+import { describe, it } from "mocha";
 
 import { interpret } from "../mod.js";
 
@@ -15,7 +16,7 @@ describe("lookup helper", () => {
         key: "foo",
       },
     });
-    assertEquals(res, "LEP GEX VEN ZEA");
+    assert.equal(res, "LEP GEX VEN ZEA");
   });
 });
 
@@ -36,6 +37,6 @@ describe("custom helpers", () => {
         },
       },
     });
-    assertEquals(res, "lep gex ven zea");
+    assert.equal(res, "lep gex ven zea");
   });
 });

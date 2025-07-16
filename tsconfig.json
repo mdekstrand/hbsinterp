@@ -6,14 +6,13 @@
     "strict": false,
     "declaration": true,
     "lib": [
-      "ESNext",
+      "ESNext"
     ]
   },
   "include": [
     "**/*.ts"
   ],
   "exclude": [
-    "deno-dom/*.ts",
     "dist/**"
   ]
 }

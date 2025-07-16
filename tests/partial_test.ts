@@ -1,5 +1,6 @@
-import { assertEquals, assertRejects } from "@std/assert";
-import { describe, it } from "@std/testing/bdd";
+import assert from "node:assert";
+
+import { describe, it } from "mocha";
 
 import { interpret } from "../mod.js";
 
@@ -16,7 +17,7 @@ describe("partials", () => {
         include: "ANDOVA BEGARIN",
       },
     });
-    assertEquals(res, "ANDOVA BEGARIN");
+    assert.equal(res, "ANDOVA BEGARIN");
   });
 
   it("should resolve variable", async () => {
@@ -31,7 +32,7 @@ describe("partials", () => {
         include: "{{name}}",
       },
     });
-    assertEquals(res, "ANDOVA BEGARIN");
+    assert.equal(res, "ANDOVA BEGARIN");
   });
 
   it("should pass context", async () => {
@@ -46,11 +47,11 @@ describe("partials", () => {
         include: "{{name}}",
       },
     });
-    assertEquals(res, "VERR YED HORRE");
+    assert.equal(res, "VERR YED HORRE");
   });
 
   it("should set parameters", async () => {
-    let res = await interpret('{{> include name="KIRJE" }}', {
+    let res = await interpret("{{> include name=\"KIRJE\" }}", {
       context: {
         name: "ANDOVA BEGARIN",
         child: {
@@ -61,6 +62,6 @@ describe("partials", () => {
         include: "{{name}}",
       },
     });
-    assertEquals(res, "KIRJE");
+    assert.equal(res, "KIRJE");
   });
 });
