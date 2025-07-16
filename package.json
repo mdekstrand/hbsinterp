@@ -16,6 +16,7 @@
   "directories": {
     "test": "tests"
   },
+  "types": "./dist/mod.d.ts",
   "module": "./dist/mod.js",
   "scripts": {
     "build": "tsc",
