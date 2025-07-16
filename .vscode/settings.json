@@ -7,5 +7,6 @@
   },
   "[jsonc]": {
     "editor.formatOnSave": true
-  }
+  },
+  "deno.enable": false
 }

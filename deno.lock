@@ -1,35 +1,32 @@
 {
-  "version": "3",
-  "packages": {
-    "specifiers": {
-      "jsr:@std/assert@^0.222.1": "jsr:@std/assert@0.222.1",
-      "jsr:@std/fmt@^0.222.1": "jsr:@std/fmt@0.222.1",
-      "jsr:@std/html@^0.222.1": "jsr:@std/html@0.222.1",
-      "jsr:@std/testing@^0.222.1": "jsr:@std/testing@0.222.1",
-      "npm:@handlebars/parser@^2.1.0": "npm:@handlebars/parser@2.1.0"
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/assert@~0.222.1": "0.222.1",
+    "jsr:@std/fmt@~0.222.1": "0.222.1",
+    "jsr:@std/html@~0.222.1": "0.222.1",
+    "jsr:@std/testing@~0.222.1": "0.222.1",
+    "npm:@handlebars/parser@^2.1.0": "2.1.0"
+  },
+  "jsr": {
+    "@std/assert@0.222.1": {
+      "integrity": "691637161ee584a9919d1f9950ddd1272feb8e0a19e83aa5b7563cedaf73d74c",
+      "dependencies": [
+        "jsr:@std/fmt"
+      ]
     },
-    "jsr": {
-      "@std/assert@0.222.1": {
-        "integrity": "691637161ee584a9919d1f9950ddd1272feb8e0a19e83aa5b7563cedaf73d74c",
-        "dependencies": [
-          "jsr:@std/fmt@^0.222.1"
-        ]
-      },
-      "@std/fmt@0.222.1": {
-        "integrity": "ec3382f9b0261c1ab1a5c804aa355d816515fa984cdd827ed32edfb187c0a722"
-      },
-      "@std/html@0.222.1": {
-        "integrity": "5b127544380ef40ecc22787faf2a4bcc6b795b6f66d07535a1846d0c16ee4bb9"
-      },
-      "@std/testing@0.222.1": {
-        "integrity": "7be5c3ef185d31883116824a2dd604eb6f12a56fd5ed80489c7c696b2a76c5bc"
-      }
+    "@std/fmt@0.222.1": {
+      "integrity": "ec3382f9b0261c1ab1a5c804aa355d816515fa984cdd827ed32edfb187c0a722"
     },
-    "npm": {
-      "@handlebars/parser@2.1.0": {
-        "integrity": "sha512-R14NuNaSKZ6eE9y4t0fg/1f8iKd5ZJtSOTIseGFzXINTV17XffhLG2Y0CvdKOgyVQ7+UnXi89YGzRo/xsgwHIA==",
-        "dependencies": {}
-      }
+    "@std/html@0.222.1": {
+      "integrity": "5b127544380ef40ecc22787faf2a4bcc6b795b6f66d07535a1846d0c16ee4bb9"
+    },
+    "@std/testing@0.222.1": {
+      "integrity": "7be5c3ef185d31883116824a2dd604eb6f12a56fd5ed80489c7c696b2a76c5bc"
+    }
+  },
+  "npm": {
+    "@handlebars/parser@2.1.0": {
+      "integrity": "sha512-R14NuNaSKZ6eE9y4t0fg/1f8iKd5ZJtSOTIseGFzXINTV17XffhLG2Y0CvdKOgyVQ7+UnXi89YGzRo/xsgwHIA=="
     }
   },
   "remote": {
@@ -111,10 +108,19 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@^0.222.1",
-      "jsr:@std/html@^0.222.1",
-      "jsr:@std/testing@^0.222.1",
+      "jsr:@std/assert@~0.222.1",
+      "jsr:@std/html@~0.222.1",
+      "jsr:@std/testing@~0.222.1",
       "npm:@handlebars/parser@^2.1.0"
-    ]
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@handlebars/parser@^2.1.0",
+        "npm:dprint@~0.50.1",
+        "npm:mocha@^11.7.1",
+        "npm:typedoc@~0.28.7",
+        "npm:typescript@^5.8.3"
+      ]
+    }
   }
 }
