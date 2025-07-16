@@ -1,0 +1,29 @@
+{
+  "name": "@mdekstrand/hbsinterp",
+  "version": "0.2.0",
+  "description": "Asynchronous Handlebars template interpreter",
+  "homepage": "https://github.com/mdekstrand/hbsinterp#readme",
+  "bugs": {
+    "url": "https://github.com/mdekstrand/hbsinterp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdekstrand/hbsinterp.git"
+  },
+  "license": "MIT",
+  "author": "Michael Ekstrand <md@ekstrandom.net>",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "dprint": "^0.50.1"
+  },
+  "dependencies": {
+    "@handlebars/parser": "^2.1.0"
+  }
+}
