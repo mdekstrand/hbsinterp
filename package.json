@@ -18,6 +18,11 @@
   },
   "types": "./dist/mod.d.ts",
   "module": "./dist/mod.js",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "tsc && mocha dist/tests"
